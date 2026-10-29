@@ -619,7 +619,7 @@
     const data = await response.json();
     addMessage(data.reply, "ai");
 } catch (error) {
-    addMessage("MiniMeera AI சேவையை இணைக்க முடியவில்லை.", "ai");
+    addMessage("AI சேவையை இணைக்க முடியவில்லை.", "ai");
 }
 promptBox.value = "";
 promptBox.style.height = "auto";
