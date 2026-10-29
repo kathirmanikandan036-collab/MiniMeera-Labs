@@ -610,12 +610,21 @@
       welcome.style.display = "none";
       addMessage(text, "user");
 
-      addMessage("qwen AI இணைப்பு இன்னும் அமைக்கப்படவில்லை.", "ai");
-
-      promptBox.value = "";
-      promptBox.style.height = "auto";
-      chatArea.scrollTop = chatArea.scrollHeight;
+      try {
+    const response = await fetch("http://127.0.0.1:8000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
     });
+    const data = await response.json();
+    addMessage(data.reply, "ai");
+} catch (error) {
+    addMessage("AI சேவையை இணைக்க முடியவில்லை.", "ai");
+}
+promptBox.value = "";
+promptBox.style.height = "auto";
+chatArea.scrollTop = chatArea.scrollHeight;
+});
 
     function addMessage(text, role) {
       const message = document.createElement("div");
